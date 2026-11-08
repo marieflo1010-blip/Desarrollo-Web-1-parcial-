@@ -699,72 +699,6 @@ p {
   border: 0;
 }
 
-/* Lo que andan diciendo: globos de diálogo alternados (izquierda / derecha) */
-.testimonios {
-  display: grid;
-  gap: 1.8rem;
-  max-width: 860px;
-  margin-inline: auto;
-}
-
-.testimonio {
-  width: min(100%, 560px);
-}
-
-/* Los pares se van a la derecha, como en un chat */
-.testimonio:nth-child(even) {
-  justify-self: end;
-}
-
-.testimonio blockquote {
-  position: relative;
-  background: var(--harina);
-  color: var(--tinta);
-  border-radius: 1.4rem;
-  padding: 1.1rem 1.4rem;
-  font-weight: 600;
-}
-
-/* Colita del globo: un triángulo hecho con bordes */
-.testimonio blockquote::after {
-  content: "";
-  position: absolute;
-  bottom: -16px;
-  left: 2rem;
-  border-top: 18px solid var(--harina);
-  border-right: 20px solid transparent;
-}
-
-.testimonio:nth-child(even) blockquote {
-  background: var(--corteza);
-}
-
-.testimonio:nth-child(even) blockquote::after {
-  left: auto;
-  right: 2rem;
-  border-top-color: var(--corteza);
-  border-right: 0;
-  border-left: 20px solid transparent;
-}
-
-.testimonio figcaption {
-  margin-top: 1.2rem;
-  padding-inline: 1.4rem;
-  font-weight: 700;
-  color: var(--texto-suave);
-}
-
-.testimonio:nth-child(even) figcaption {
-  text-align: right;
-}
-
-.nota-testimonios {
-  margin: 2.5rem auto 0;
-  text-align: center;
-  font-size: 0.85rem;
-  color: var(--texto-suave);
-}
-
 /* CTA final */
 .cta-final {
   text-align: center;
@@ -1625,6 +1559,34 @@ fieldset.campo {
   }
 }
 
+/* Celulares, tablets y pantallas angostas: el chisme deja de flotar encima
+   del producto y pasa a ser una franja dentro de la tarjeta */
+@media (hover: none), (max-width: 800px) {
+  /* Tarjetas chicas (foto a la izquierda, texto a la derecha):
+     el chisme baja a una segunda fila que ocupa todo el ancho */
+  .producto:not(.producto-grande) {
+    flex-wrap: wrap;
+  }
+
+  .producto:not(.producto-grande) .producto-info {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .producto:not(.producto-grande) .chisme {
+    flex: 0 0 calc(100% - 2rem);
+  }
+
+  /* Todas las tarjetas: el chisme va al final, en el flujo normal */
+  .chisme {
+    position: static;
+    order: 3;
+    margin: 0 1rem 1.2rem;
+    opacity: 1;
+    transform: rotate(-1deg);
+    transition: none;
+  }
+}
 /* Cómo pedir en 3 pasos: contador CSS para los números grandes */
 .pasos {
   display: grid;
